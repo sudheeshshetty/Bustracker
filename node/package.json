@@ -1,0 +1,23 @@
+{
+  "name": "publicTransport",
+  "description": "An IOT based project to help general public about location tracing, and getting information that can be very vital for there day to day travel",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "body-parser": "^1.15.2",
+    "cors": "^2.7.1",
+    "csv-parse": "^1.1.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.3"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "config": {
+    "server": {
+      "port": "8000"
+    },
+    "db": {
+      "url": "mongodb://10.131.126.13:27017/publicTransport"
+    }
+  }
+}
