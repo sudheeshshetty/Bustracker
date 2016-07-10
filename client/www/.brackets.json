@@ -1,0 +1,21 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/Tracker/tracker/www/js/controllers.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular-ui/angular-ui-router.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular-ui/angular-ui-router.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-sanitize.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-resource.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-animate.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-resource.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/js/controllers.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-sanitize.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/sss/lib/ionic/js/angular/angular-animate.js",
+        "/home/sudheesh/tracker/final/Tracker/www/lib/ngCordova/dist/ng-cordova-mocks.js",
+        "/home/sudheesh/tracker/final/Tracker/www/lib/ngCordova/dist/ng-cordova.js",
+        "/home/sudheesh/tracker/final/Tracker/www/lib/ngCordova/dist/ng-cordova-mocks.min.js",
+        "/home/sudheesh/tracker/final/Tracker/www/js/app.js",
+        "/home/sudheesh/tracker/final/Tracker/www/lib/ngCordova/dist/ng-cordova.min.js"
+    ]
+}

@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div>
+        <form class="form-inline">
+            <div class="form-group">
+                    <div class="bar bar-header item-input-inset" style="background: none;">
+                        <label class="item-input-wrapper">
+                            <input id="dest" type="search"  ng-focus="loc.dest='';maps=false;tab=true;bus_stops=true;bus=false;searchdest()" ng-change="searchdest()" ng-model="loc.dest" placeholder=" Enter Destination"> 
+                        </label>  
+                    </div>
+            </div>
+<!--            <button ng-click="destid()" style="text-align:center" class="btn btn-default">Search</button>-->
+        </form>
+    </div>
+    <div id="map" data-tap-disabled="true" ng-model="map" ng-show="maps"></div>
+    <div id="tab" class="container" ng-show="tab" >
+        <div class="list-group" ng-show="bus_stops" ng-click="bus_stops=false; bus=true" >
+            <button type="button" class="list-group-item" ng-click="loc.dest=dest;searchBus()" ng-repeat="dest in dests" value={{dest}}>{{dest}}</button>
+        </div>
+        <div class="list-group" ng-show="bus" ng-click="bus=false;tab=false;maps=true">
+            <button type="button" class="list-group-item"  ng-click="loc.bus_number=buss;getBus()" ng-repeat="buss in bus_sets" value={{buss}}>{{buss}}</button>
+        </div>
+    </div>
+</div>
