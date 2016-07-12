@@ -29,9 +29,10 @@
 
 #city{
     background-color: white;
+    width: 100%;
 }
 
-#mainscreen{
+.mainscreen{
 /*    background-image: url(/img/bus_main.png);
     max-height: 100%;
     max-width: 100%;
@@ -40,18 +41,32 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: firebrick;*/
-    width: 70%;
+
+    width: 95%;
+    text-align: center;
     position: absolute;
     top: 0.8%;
-    right: 2%;
     z-index: 99;
+
+}
+.firsthalf{
+    width:80%;
+    
+}
+.secondhalf{
+    width:20%;
+    background-color: firebrick;
+    margin-bottom: 2%;
 }
 
-#check{
-    position: absolute;
-    bottom: 1%;
-    margin: auto;
-    z-index: 99;
+.form-group-gap-reduce{
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.check{
+    width: 100%;
+    height: 100%;
 }
 
 .main-input{

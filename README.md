@@ -22,4 +22,6 @@ Today cities are moving towards being smart. There are lots of application helpi
 
 ##### Frontend - Angular
 * Install Apache Httpd Server.
-* Put the `/Bustracker/client` in `htdocs`
+* npm `sudo npm install -g http-server`
+* Go to `/Bustracker/client/www/` and run `http-server`
+* Go to Browser and type the url show in screen.

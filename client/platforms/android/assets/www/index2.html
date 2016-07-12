@@ -1,68 +1,70 @@
-<!DOCTYPE html>
-<html>
-<style>
-.button{
-
-  position: absolute; bottom: 0px; width:100%;
-
-}
-</style>
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBiAbh9nvAp-OQBYbdR8RmFS3qGBWc8u4o&senson=true"></script>
-  </head>
-  <body ng-app="starter">
-
-    <ion-nav-view>
-    <div class="bar bar-header bar-balanced">
-      <h1 class="title">Bus Stop Details</h1>
-    </div><br/><br/>
-    <div class="list" ng-controller="AppCtrl">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Enter Bus Stop</span>
-        <input type="text" ng-model="busstop" placeholder="Infi Circle">
-      </label>
-      <!-- <label class="item item-input item-stacked-label">
-        <span class="input-label">Source</span>
-        <input type="text" placeholder="Hinjewadi">
-      </label> -->
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Destination</span>
-        <input type="text" ng-model="destination" placeholder="Pune Station">
-      </label>
-      <br/>
-      <a class="button button-outline button-assertive" href ng-click="refresh();">Refresh</a>
-    </div>
-    
-        <div class="bar bar-header bar-positive" ng-controller="AppCtrl">
-          <h1 class="title">Bus Tracker</h1>
+<div id="cont" class="container-fluid">
+    <div id="map" data-tap-disabled="true" ng-model="map"></div>
+    <div id="mainscreen" >
+        <div class="row">
+            
+                <div class="bar bar-header item-input-inset" style="background: none;">
+                  <label class="item-input-wrapper">
+                    <input id="city" type="search" ng-focus="city=''; location=''" ng-change="searchcity()" ng-model="city" placeholder="Enter City" list="cityList">
+                    <datalist id="cityList">
+                        <option ng-repeat="city in cities" value={{city}}>{{city}}</option>
+                    </datalist>  
+                  </label>  
+                </div>
+            
         </div>
-        
-        <div id="map" data-tap-disabled="true"></div>
-      
+        <div class="row">
+            
+                <div class="bar bar-header item-input-inset" style="background: none;">
+                  <label class="item-input-wrapper">
+                    <input id="city" type="search" ng-focus="location='';searchcity()" ng-model="location" ng-change="searchlocation()" placeholder="Enter Location" list="locationList">
+                    <datalist id="locationList"  >
+                        <option  ng-repeat="location in locations" value={{location.name}}>{{location.name}}</option>
+                    </datalist>
+                  </label>
+                </div>
+        </div>
+    </div>
+</div>
 
-    </ion-nav-view>
-    
-  </body>
-</html>
+
+
+
+
+
+
+
+
+
+<div id="mySidenav" class="sidenav list-group" ng-style="mySidenav">
+    <a href="" class="closebtn" ng-click="mySidenav={'display': 'none'}">
+        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+    </a>
+    <div id="user" class="list-group-item text-center">
+        <img src="img/bus.png" class="img-circle center-block img-responsive">
+        <p>Sudheesh Shetty</p>
+        <p>sudheeshshetty@gmail.com</p>
+    </div>
+    <a href="#" class="list-group-item"><i class="glyphicon glyphicon-road pull-right"></i> Your Trips</a>
+    <a href="#" class="list-group-item"><i class="pull-right glyphicon glyphicon-user"></i>
+        Account Settings</a>
+    <a href="#" class="list-group-item"><i class="pull-right glyphicon glyphicon-envelope"></i>
+        Send Feedback</a>
+    <a href="#" class="list-group-item"><i class="pull-right glyphicon glyphicon-info-sign"></i>
+        About Us</a>
+</div>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="row">
+            <button type="button" ng-click="mySidenav={'display': 'block'}" class="head btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button> 
+            <input type="text"  class="head form-control" placeholder="   Enter Destination">
+            <button type="button" class="head btn btn-default" ng-click="search()" aria-label="Left Align">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button> 
+        </div>
+    </div>
+</nav>
+<div id="map" data-tap-disabled="true" ng-model="map"></div>

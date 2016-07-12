@@ -3,13 +3,7 @@ var app = angular.module('myApp', ['ui.router','ionic','ngCordova']);
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         if(window.cordova && window.cordova.plugins.Keyboard) {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            
-            // Don't remove this line unless you know what you are doing. It stops the viewport
-            // from snapping when text inputs are focused. Ionic handles this internally for
-            // a much nicer keyboard experience.
             cordova.plugins.Keyboard.disableScroll(true);
         }
         if(window.StatusBar) {
@@ -23,11 +17,11 @@ app.service('Loc', function () {
 })
 
 app.service('Map',function(){
-    this.showMap =function(lat,long){
+    this.showMap =function(lat,long,zoomvalue){
         var mylatlong = new google.maps.LatLng(lat,long);
         mapOptions={
             center: mylatlong,
-            zoom: 14,
+            zoom: zoomvalue,
             mapTypeControl:true,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -65,7 +59,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         url:'/main?source',
         views:{
             'header':{
-                templateUrl: 'map.html',
+                templateUrl: 'views/secondpage.html',
                 controller: 'HeaderController'
             }
         }
@@ -74,7 +68,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         url:'/',
         views:{
             'header':{
-                templateUrl:'main.html',
+                templateUrl:'views/firstpage.html',
                 controller:'MainController'
             }
         }
@@ -87,7 +81,7 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
     $scope.loc=Loc;
     var lat=$scope.loc.lat;
     var long=$scope.loc.long;
-    var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long);
+    var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long,12);
     $scope.map=mapObject;
     $scope.tab=false;
     $scope.maps=true;
@@ -108,16 +102,15 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
             }
             $scope.dests=destSet;
             console.log($scope.dests);
-            
         });
     }
     $scope.destid=function(){
         var busstopnotation=res.data[0].notation;
-                var activeElement = document.activeElement;
-                if (activeElement) {
-                    activeElement.blur();
-                }
-                console.log(busstopnotation);
+        var activeElement = document.activeElement;
+        if (activeElement) {
+            activeElement.blur();
+        }
+        console.log(busstopnotation);
     }
     $scope.searchBus=function(){
         console.log($scope.dests.indexOf($scope.loc.dest));
@@ -125,7 +118,7 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
         console.log(destnotation);
         $http.get("http://localhost:8000/v1/find?source="+notation+"&destination="+destnotation).then(function(res){
             console.log(res);
-            var buses=[]
+            var buses=[];
             $scope.bus_sets=[];
             for(indx in res.data){
                 buses.push(res.data[indx].number);
@@ -133,14 +126,11 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
             $scope.bus_sets=buses;
             console.log($scope.bus_sets);
         });
-        
     }
     
     $scope.getBus = function(){
         var markers=[];
         console.log($scope.loc.bus_number);
-        
-//        $scope.map=mapObject;
         window.setInterval(function(){
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
@@ -177,7 +167,7 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
         $scope.loc.long = position.coords.longitude;
         //  $scope.map=map;
         var mylatlong = new google.maps.LatLng($scope.loc.lat,$scope.loc.long);
-        var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long);
+        var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long,16);
         $scope.map=mapObject;
         
         var geocoder = new google.maps.Geocoder();
@@ -237,10 +227,8 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
             $scope.cities=citylist;
             if(res.data.length==1) {
                 $scope.locations = res.data[0].locations;
-                
             }
         });
-        
     }
     
     $scope.searchlocation = function(){
@@ -263,7 +251,7 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
                     }
                     $scope.loc.lat = res.data[0].lat;
                     $scope.loc.long = res.data[0].long;
-                    var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long);
+                    var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long,16);
                     $scope.map=mapObject;
                     $http.get("http://localhost:8000/v1/stops?lat="+$scope.loc.lat+"&long="+$scope.loc.long).then(function(res){
                         console.log(res);
@@ -278,9 +266,9 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
                                 map: map,
                                 title: "Your Location",
                                 icon : {
-                                  url: 'img/bus_stop.png',
-                                  scaledSize: new google.maps.Size(30, 30)
-                               }
+                                    url: 'img/bus_stop.png',
+                                    scaledSize: new google.maps.Size(30, 30)
+                                }
                             });
                             if(res.data[indx].nearest)
                             {
@@ -305,8 +293,8 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
                                 });
                             }
                             google.maps.event.addListener(marker,'click',function() {
-                        var latitude = this.position.lat();
-                        var longitude = this.position.lng();
+                                var latitude = this.position.lat();
+                                var longitude = this.position.lng();
                                 var max = 10000000;
                                 for(var indx in $scope.recentLocation) {
                                     var dist = $scope.getDistanceHaversine($scope.recentLocation[indx].lat,latitude,$scope.recentLocation[indx].long,longitude)
@@ -316,34 +304,33 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
                                     }
                                 }
                                 $state.go('main', {source:notation});
-                    });
+                            });
                         }
-                    });
-                    
+                    });        
                 }
             });
         }
     }
     $scope.rad = function(x) {
-  return x * Math.PI / 180;
-};
-
-// http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
-$scope.getDistanceHaversine = function(x1, x2, y1, y2) {
-  var R = 6378137; // Earth’s mean radius in meter
-  var dLat = $scope.rad(x2 - x1);
-  var dLong = $scope.rad(y2 - y1);
-  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos($scope.rad(x1)) * Math.cos($scope.rad(x2)) *
-    Math.sin(dLong / 2) * Math.sin(dLong / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c;
-  return d; // returns the distance in meter
-};
+        return x * Math.PI / 180;
+    };
     
+    // http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
+    $scope.getDistanceHaversine = function(x1, x2, y1, y2) {
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = $scope.rad(x2 - x1);
+        var dLong = $scope.rad(y2 - y1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos($scope.rad(x1)) * Math.cos($scope.rad(x2)) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d; // returns the distance in meter
+    };
     
     
     $scope.switchState = function(){
         $state.go("main");
     }
 }]);
+

@@ -1,0 +1,27 @@
+<div id="cont" class="container-fluid">
+    <div id="map" data-tap-disabled="true" ng-model="map"></div>
+    <div class="mainscreen">
+        <form class="form-inline">
+            <div class="form-group form-group-gap-reduce">
+                    <div class="bar bar-header item-input-inset" style="background: none;">
+                        <label class="item-input-wrapper">
+                            <input id="city" type="search" ng-focus="loc.city=''; loc.location=''" ng-change="searchcity()" ng-model="loc.city" placeholder="Enter City" list="cityList">
+                            <datalist id="cityList">
+                                <option ng-repeat="city in cities" value={{city}}>{{city}}</option>
+                            </datalist>  
+                        </label>  
+                    </div>
+            </div>    
+            <div class="form-group form-group-gap-reduce">
+                    <div class="bar bar-header item-input-inset" style="background: none;">
+                        <label class="item-input-wrapper">
+                            <input id="city" type="search" ng-focus="loc.location='';searchcity()" ng-model="loc.location" ng-change="searchlocation()" placeholder="Enter Location" list="locationList">
+                            <datalist id="locationList"  >
+                                <option  ng-repeat="location in locations" value={{location.name}}>{{location.name}}</option>
+                            </datalist>
+                        </label>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
