@@ -17,7 +17,7 @@
       "port": "8000"
     },
     "db": {
-      "url": "mongodb://10.131.126.13:27017/publicTransport"
+      "url": "mongodb://localhost:27017/publicTransport"
     }
   }
 }

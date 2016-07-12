@@ -97,7 +97,7 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
     $scope.loc.bus_number;
     var notation=$stateParams.source;
     $scope.searchdest=function(){
-        $http.get("http://10.131.126.13:8000/v1/busstops?search="+$scope.loc.dest+"&city="+$scope.loc.city).then(function(res){
+        $http.get("http://localhost:8000/v1/busstops?search="+$scope.loc.dest+"&city="+$scope.loc.city).then(function(res){
             console.log(res);
             $scope.dests=[]
             var destSet=[];
@@ -123,7 +123,7 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
         console.log($scope.dests.indexOf($scope.loc.dest));
         var destnotation=$scope.busstopset[$scope.dests.indexOf($scope.loc.dest)];
         console.log(destnotation);
-        $http.get("http://10.131.126.13:8000/v1/find?source="+notation+"&destination="+destnotation).then(function(res){
+        $http.get("http://localhost:8000/v1/find?source="+notation+"&destination="+destnotation).then(function(res){
             console.log(res);
             var buses=[]
             $scope.bus_sets=[];
@@ -145,7 +145,7 @@ app.controller('HeaderController',['$scope','$state','$cordovaGeolocation','$htt
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
             }
-            $http.get("http://10.131.126.13:8000/v1/position?busNumber="+$scope.loc.bus_number).then(function(res){
+            $http.get("http://localhost:8000/v1/position?busNumber="+$scope.loc.bus_number).then(function(res){
                 console.log(res);
                 for (indx in res.data){
                     var mylatlong_local = new google.maps.LatLng(res.data[indx].lat,res.data[indx].long);
@@ -226,7 +226,7 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
     pos.then(onSuccess, onError);
     
     $scope.searchcity = function(){
-        $http.get("http://10.131.126.13:8000/v1/cities?search="+$scope.loc.city).then(function(res){
+        $http.get("http://localhost:8000/v1/cities?search="+$scope.loc.city).then(function(res){
             $scope.cities=[];
             var citylist=[]
             $scope.locations=[];
@@ -249,7 +249,7 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
         }
         else
         {
-            $http.get("http://10.131.126.13:8000/v1/locations?search="+$scope.loc.location+"&city="+$scope.loc.city).then(function(res){
+            $http.get("http://localhost:8000/v1/locations?search="+$scope.loc.location+"&city="+$scope.loc.city).then(function(res){
                 var locationlist=[];
                 for(indx in res.data){
                     locationlist.push(res.data[indx].name);
@@ -265,7 +265,7 @@ app.controller('MainController',['$scope','$state','$cordovaGeolocation','$http'
                     $scope.loc.long = res.data[0].long;
                     var mapObject=Map.showMap($scope.loc.lat,$scope.loc.long);
                     $scope.map=mapObject;
-                    $http.get("http://10.131.126.13:8000/v1/stops?lat="+$scope.loc.lat+"&long="+$scope.loc.long).then(function(res){
+                    $http.get("http://localhost:8000/v1/stops?lat="+$scope.loc.lat+"&long="+$scope.loc.long).then(function(res){
                         console.log(res);
                         $scope.recentLocation = res.data;
                         for(indx in res.data){
